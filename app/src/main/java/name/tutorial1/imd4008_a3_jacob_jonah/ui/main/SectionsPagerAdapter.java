@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import name.tutorial1.imd4008_a3_jacob_jonah.R;
 
 /**
@@ -16,9 +19,12 @@ import name.tutorial1.imd4008_a3_jacob_jonah.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+
     private final Context mContext;
+
+    // this website (http://www.gadgetsaint.com/android/create-viewpager-tabs-android/) was a used as a source to help us get started with fragments
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
@@ -27,20 +33,23 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        return mFragmentList.get(position);
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+        return mFragmentTitleList.get(position);
     }
 
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return mFragmentList.size();
+    }
+
+    public void addFragment(Fragment fragment, String title){
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
     }
 }

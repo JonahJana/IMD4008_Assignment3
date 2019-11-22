@@ -1,5 +1,6 @@
 package name.tutorial1.imd4008_a3_jacob_jonah;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import name.tutorial1.imd4008_a3_jacob_jonah.ui.main.SectionsPagerAdapter;
+import name.tutorial1.imd4008_a3_jacob_jonah.ui.main.edit_meetings;
+import name.tutorial1.imd4008_a3_jacob_jonah.ui.main.view_meetings;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
+
+        sectionsPagerAdapter.addFragment(new edit_meetings(), "EDIT");
+        sectionsPagerAdapter.addFragment(new view_meetings(), "VIEW");
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
